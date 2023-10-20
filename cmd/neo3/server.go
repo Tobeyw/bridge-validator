@@ -49,9 +49,9 @@ func Server(cfg config.Config, logger *logrus.Logger) {
 					eventName := notification.EventName
 
 					if contract == *cfg.NeoN3BridgeContractAddr && eventName == "OnDeposit" {
-						handlDeposit(notification, cfg, logger)
+						handleDeposit(notification, cfg, logger)
 					} else if contract == *cfg.NeoN3BridgeContractAddr && eventName == "OnDeposit" {
-						handlWithdrawal(notification, cfg, logger)
+						handleWithdrawal(notification, cfg, logger)
 					}
 				}
 

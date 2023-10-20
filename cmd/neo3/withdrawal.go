@@ -12,7 +12,7 @@ import (
 	"strconv"
 )
 
-func handlWithdrawal(notification models.RpcNotification, cfg config.Config, logger *logrus.Logger) {
+func handleWithdrawal(notification models.RpcNotification, cfg config.Config, logger *logrus.Logger) {
 	if notification.State.Type != "Array" {
 		logger.Error("notification.State.Type error: Type is not Array")
 	}
