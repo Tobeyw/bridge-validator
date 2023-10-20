@@ -1,0 +1,7 @@
+key_pair_file: /tmp/file.key
+message_broker_url: http://localhost:3131
+n3_node_url: http://localhost:30331
+bane_node_url: http://localhost:9090
+bane_node_wss: wss://localhost:9091
+bane_bridge_contract_addr: 0xFF00
+n3_bridge_contract_addr: 0xFF00

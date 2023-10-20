@@ -101,6 +101,7 @@ func (app *ValidatorApp) run() {
 	// Code here.
 	app.logger.Info("Bridge Validator is running.")
 	neo3.Server(app.Config, app.logger)
+	neo3.Server(app.Config, app.logger)
 }
 
 func main() {
