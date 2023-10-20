@@ -1,6 +1,8 @@
 package main
 
 import (
+	"github.com/bane-labs/bridge-validator/cmd/config"
+	"github.com/bane-labs/bridge-validator/cmd/neo3"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -9,17 +11,8 @@ import (
 	"github.com/spf13/viper"
 )
 
-type Config struct {
-	KeyPairFile             *string
-	MessageBrokerAddress    *string
-	NeoN3NodeURL            *string
-	BaneNodeURL             *string
-	BaneBridgeContractAddr  *string
-	NeoN3BridgeContractAddr *string
-}
-
 type ValidatorApp struct {
-	Config Config
+	Config config.Config
 	cmd    *cobra.Command
 	logger *logrus.Logger
 }
@@ -66,7 +59,7 @@ func (app *ValidatorApp) initConfig() {
 		app.logger.Warn("Can't read config: ", err)
 	}
 
-	app.Config = Config{
+	app.Config = config.Config{
 		KeyPairFile:             getStringPointer(viper.GetString("key_pair_file")),
 		MessageBrokerAddress:    getStringPointer(viper.GetString("message_broker_url")),
 		NeoN3NodeURL:            getStringPointer(viper.GetString("n3_node_url")),
@@ -107,6 +100,7 @@ func (app *ValidatorApp) run() {
 	// This is the start of the bridge validator app.
 	// Code here.
 	app.logger.Info("Bridge Validator is running.")
+	neo3.Server(app.Config, app.logger)
 }
 
 func main() {
