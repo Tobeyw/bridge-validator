@@ -2,8 +2,8 @@ package neo3
 
 import (
 	"fmt"
-	"github.com/bane-labs/bridge-validator/cmd/common"
-	"github.com/bane-labs/bridge-validator/cmd/config"
+	"github.com/bane-labs/bridge-validator/common"
+	"github.com/bane-labs/bridge-validator/config"
 	"github.com/joeqian10/neo3-gogogo/crypto"
 	"github.com/joeqian10/neo3-gogogo/helper"
 	"github.com/joeqian10/neo3-gogogo/rpc/models"

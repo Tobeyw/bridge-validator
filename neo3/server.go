@@ -1,7 +1,7 @@
 package neo3
 
 import (
-	"github.com/bane-labs/bridge-validator/cmd/config"
+	"github.com/bane-labs/bridge-validator/config"
 	"github.com/joeqian10/neo3-gogogo/rpc"
 	"github.com/sirupsen/logrus"
 	"strconv"
@@ -23,8 +23,10 @@ func Server(cfg config.Config, logger *logrus.Logger) {
 	}
 
 	blockCount := blockCountResponse.Result
+	startBlockNum := lastBlockNumber
+	lastBlockNumber = blockCount //update blockNumber
 
-	for i := lastBlockNumber; i < blockCount; i++ { //Unknown block
+	for i := startBlockNum; i < blockCount; i++ { //Unknown block
 		blockResponse := neoRpc.GetBlock(strconv.Itoa(int(i)))
 		if blockResponse.HasError() {
 			logger.Error("neoSdk.GetBlock error:", blockResponse.GetErrorInfo())
