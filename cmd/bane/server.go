@@ -2,7 +2,6 @@ package bane
 
 import (
 	"context"
-	"fmt"
 	"github.com/bane-labs/bridge-validator/cmd/config"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
@@ -37,12 +36,10 @@ func Server(cfg config.Config, logger *logrus.Logger) {
 		case err := <-sub.Err():
 			logger.Fatal(err)
 		case vLog := <-logs:
-			fmt.Println(vLog) // pointer to common log
-
 			topics := vLog.Topics
 			data := vLog.Data
 			event := topics[0]
-			depositEvent := []byte("Deposit(uint,address,uint)")
+			depositEvent := []byte("Deposit(uint,address,address,uint,bytes,bytes)")
 			withdrawalEvent := []byte("Withdrawal(uint,address,uint)")
 			depositHash := crypto.Keccak256Hash(depositEvent)
 			withdrawalHash := crypto.Keccak256Hash(withdrawalEvent)
