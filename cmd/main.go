@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/bane-labs/bridge-validator/cmd/config"
 	"github.com/bane-labs/bridge-validator/cmd/neo3"
+	"github.com/robfig/cron/v3"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -100,7 +101,16 @@ func (app *ValidatorApp) run() {
 	// This is the start of the bridge validator app.
 	// Code here.
 	app.logger.Info("Bridge Validator is running.")
-	neo3.Server(app.Config, app.logger)
+
+	crontab := cron.New(cron.WithSeconds())
+	task := func() {
+		go neo3.Server(app.Config, app.logger)
+	}
+	spec := "*/15 * * * * ?"
+	crontab.AddFunc(spec, task)
+	crontab.Start()
+	select {}
+
 }
 
 func main() {
