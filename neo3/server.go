@@ -1,7 +1,7 @@
 package neo3
 
 import (
-	"github.com/bane-labs/bridge-validator/cmd/config"
+	"github.com/bane-labs/bridge-validator/config"
 	"github.com/joeqian10/neo3-gogogo/rpc"
 	"github.com/sirupsen/logrus"
 	"strconv"

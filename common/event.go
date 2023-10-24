@@ -2,7 +2,7 @@ package common
 
 import (
 	"encoding/json"
-	"github.com/bane-labs/bridge-validator/cmd/config"
+	"github.com/bane-labs/bridge-validator/config"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 

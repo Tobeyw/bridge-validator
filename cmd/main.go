@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/bane-labs/bridge-validator/cmd/bane"
-	"github.com/bane-labs/bridge-validator/cmd/config"
-	"github.com/bane-labs/bridge-validator/cmd/neo3"
+	"github.com/bane-labs/bridge-validator/bane"
+	"github.com/bane-labs/bridge-validator/config"
+	"github.com/bane-labs/bridge-validator/neo3"
 	"github.com/robfig/cron/v3"
 	"os"
 

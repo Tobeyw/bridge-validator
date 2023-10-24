@@ -2,14 +2,17 @@ package bane
 
 import (
 	"context"
-	"github.com/bane-labs/bridge-validator/cmd/config"
+	"github.com/bane-labs/bridge-validator/config"
+	"github.com/bane-labs/bridge-validator/contracts/bridge"
 	"github.com/ethereum/go-ethereum"
+	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/sirupsen/logrus"
 	"math/big"
+	"strings"
 )
 
 func Server(cfg config.Config, logger *logrus.Logger) {
@@ -31,6 +34,8 @@ func Server(cfg config.Config, logger *logrus.Logger) {
 		logger.Fatal(err)
 	}
 
+	contractAbi, err := abi.JSON(strings.NewReader(string(bridge.BridgeEventMetaData.ABI)))
+
 	for {
 		select {
 		case err := <-sub.Err():
@@ -45,9 +50,9 @@ func Server(cfg config.Config, logger *logrus.Logger) {
 			withdrawalHash := crypto.Keccak256Hash(withdrawalEvent)
 
 			if event == depositHash {
-				handleDeposit(data, cfg, logger)
+				handleDeposit(contractAbi, data, cfg, logger)
 			} else if event == withdrawalHash {
-				handleWithdrawal(data, cfg, logger)
+				handleWithdrawal(contractAbi, data, cfg, logger)
 			}
 		}
 	}
