@@ -104,9 +104,6 @@ func (app *ValidatorApp) run() {
 	app.logger.Info("Bridge Validator is running.")
 
 	// neo3 server
-	go func() {
-		neo3.Server(app.Config, app.logger)
-	}()
 	crontab := cron.New(cron.WithSeconds()) //精确到秒
 	task := func() {
 		neo3.Server(app.Config, app.logger)

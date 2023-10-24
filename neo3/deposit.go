@@ -13,7 +13,7 @@ import (
 	"strconv"
 )
 
-func handlDeposit(notification models.RpcNotification, cfg config.Config, logger *logrus.Logger) {
+func handleDeposit(notification models.RpcNotification, cfg config.Config, logger *logrus.Logger) {
 	if notification.State.Type != "Array" {
 		logger.Error("notification.State.Type error: Type is not Array")
 	}

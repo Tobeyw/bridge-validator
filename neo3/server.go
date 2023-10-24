@@ -24,7 +24,10 @@ func Server(cfg config.Config, logger *logrus.Logger) {
 
 	blockCount := blockCountResponse.Result
 
-	for i := lastBlockNumber; i < blockCount; i++ { //Unknown block
+	startBlockNum := lastBlockNumber
+	lastBlockNumber = blockCount //update blockNumber
+
+	for i := startBlockNum; i < blockCount; i++ { //Unknown block
 		blockResponse := neoRpc.GetBlock(strconv.Itoa(int(i)))
 		if blockResponse.HasError() {
 			logger.Error("neoSdk.GetBlock error:", blockResponse.GetErrorInfo())
@@ -49,9 +52,9 @@ func Server(cfg config.Config, logger *logrus.Logger) {
 					eventName := notification.EventName
 
 					if contract == *cfg.NeoN3BridgeContractAddr && eventName == "OnDeposit" {
-						handlDeposit(notification, cfg, logger)
+						handleDeposit(notification, cfg, logger)
 					} else if contract == *cfg.NeoN3BridgeContractAddr && eventName == "OnDeposit" {
-						handlWithdrawal(notification, cfg, logger)
+						handleWithdrawal(notification, cfg, logger)
 					}
 				}
 
