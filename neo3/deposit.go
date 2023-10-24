@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/bane-labs/bridge-validator/common"
 	"github.com/bane-labs/bridge-validator/config"
+	"github.com/bane-labs/bridge-validator/contracts/neo3"
 	"github.com/joeqian10/neo3-gogogo/crypto"
 	"github.com/joeqian10/neo3-gogogo/helper"
 	"github.com/joeqian10/neo3-gogogo/rpc/models"
@@ -63,7 +64,7 @@ func handlDeposit(notification models.RpcNotification, cfg config.Config, logger
 	}
 	root := string(rootBytes)
 
-	eventData := common.DepositEvent{
+	eventData := neo3.DepositEvent{
 		Nonce:       &nonce,
 		FromAddress: &fromScriptHash,
 		ToAddress:   &toScriptHash,

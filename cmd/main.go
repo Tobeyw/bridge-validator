@@ -102,6 +102,8 @@ func (app *ValidatorApp) run() {
 	// This is the start of the bridge validator app.
 	// Code here.
 	app.logger.Info("Bridge Validator is running.")
+
+	// neo3 server
 	go func() {
 		neo3.Server(app.Config, app.logger)
 	}()
@@ -109,10 +111,12 @@ func (app *ValidatorApp) run() {
 	task := func() {
 		neo3.Server(app.Config, app.logger)
 	}
-
 	spec := "*/15 * * * * ?"
 	crontab.AddFunc(spec, task)
 	crontab.Start()
+	select {}
+
+	// Bane Server
 	bane.Server(app.Config, app.logger)
 }
 

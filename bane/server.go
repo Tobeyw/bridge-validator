@@ -3,7 +3,7 @@ package bane
 import (
 	"context"
 	"github.com/bane-labs/bridge-validator/config"
-	"github.com/bane-labs/bridge-validator/contracts/bridge"
+	"github.com/bane-labs/bridge-validator/contracts/bane"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
@@ -34,7 +34,7 @@ func Server(cfg config.Config, logger *logrus.Logger) {
 		logger.Fatal(err)
 	}
 
-	contractAbi, err := abi.JSON(strings.NewReader(string(bridge.BridgeEventMetaData.ABI)))
+	contractAbi, err := abi.JSON(strings.NewReader(string(bane.BridgeEventMetaData.ABI)))
 
 	for {
 		select {

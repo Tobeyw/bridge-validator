@@ -4,7 +4,7 @@ import (
 	"fmt"
 	common2 "github.com/bane-labs/bridge-validator/common"
 	"github.com/bane-labs/bridge-validator/config"
-	"github.com/bane-labs/bridge-validator/contracts/bridge"
+	"github.com/bane-labs/bridge-validator/contracts/bane"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -25,7 +25,7 @@ func handleWithdrawal(abi abi.ABI, data []byte, cfg config.Config, logger *logru
 		return
 	}
 
-	var eventData = bridge.BridgeEventWithdrawal{
+	var eventData = bane.BridgeEventWithdrawal{
 		Nonce:          withdrawal[0].(*big.Int),
 		From:           withdrawal[1].(common.Address),
 		To:             withdrawal[2].(common.Address),
