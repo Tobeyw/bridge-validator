@@ -5,24 +5,7 @@ import (
 	"github.com/bane-labs/bridge-validator/config"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-
-	"math/big"
 )
-
-type DepositEvent struct {
-	Nonce       *int
-	FromAddress *string
-	ToAddress   *string
-	Amount      *big.Int
-	DepositHash *string
-	Root        *string
-}
-
-type WithdrawalEvent struct {
-	Nonce     *int
-	ToAddress *string
-	Amount    *big.Int
-}
 
 func ToByteArray(event interface{}) ([]byte, error) {
 	data, err := json.Marshal(event)

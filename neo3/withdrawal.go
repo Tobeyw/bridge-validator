@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/bane-labs/bridge-validator/common"
 	"github.com/bane-labs/bridge-validator/config"
+	"github.com/bane-labs/bridge-validator/contracts/neo3"
 	"github.com/joeqian10/neo3-gogogo/crypto"
 	"github.com/joeqian10/neo3-gogogo/helper"
 	"github.com/joeqian10/neo3-gogogo/rpc/models"
@@ -40,7 +41,7 @@ func handleWithdrawal(notification models.RpcNotification, cfg config.Config, lo
 		logger.Error("big.Int.SetString amount error: ", err)
 	}
 
-	eventData := common.WithdrawalEvent{
+	eventData := neo3.WithdrawalEvent{
 		Nonce:     &nonce,
 		ToAddress: &toScriptHash,
 		Amount:    amount,
