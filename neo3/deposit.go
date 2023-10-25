@@ -51,7 +51,7 @@ func handleDeposit(notification models.RpcNotification, cfg config.Config, logge
 	// get depositHash
 	depositBytes, err := crypto.Base64Decode(state[4].Value.(string))
 	if err != nil {
-		logger.Error("crypto.Base64Decode fromAssetHash error: %v", err)
+		logger.Error("crypto.Base64Decode fromAssetHash error:", err)
 
 	}
 	depositHash := string(depositBytes)
@@ -59,7 +59,7 @@ func handleDeposit(notification models.RpcNotification, cfg config.Config, logge
 	// get root
 	rootBytes, err := crypto.Base64Decode(state[5].Value.(string))
 	if err != nil {
-		logger.Error("crypto.Base64Decode fromAssetHash error: %v", err)
+		logger.Error("crypto.Base64Decode fromAssetHash error:", err)
 
 	}
 	root := string(rootBytes)

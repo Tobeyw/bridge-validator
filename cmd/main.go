@@ -54,7 +54,7 @@ func (app *ValidatorApp) initConfig() {
 	} else {
 		viper.AddConfigPath(".")
 		viper.SetConfigName("config")
-		viper.SetConfigType("json")
+		viper.SetConfigType("yaml")
 	}
 
 	if err := viper.ReadInConfig(); err != nil {
@@ -104,6 +104,7 @@ func (app *ValidatorApp) run() {
 	app.logger.Info("Bridge Validator is running.")
 
 	// neo3 server
+
 	crontab := cron.New(cron.WithSeconds()) //精确到秒
 	task := func() {
 		neo3.Server(app.Config, app.logger)
@@ -111,10 +112,10 @@ func (app *ValidatorApp) run() {
 	spec := "*/15 * * * * ?"
 	crontab.AddFunc(spec, task)
 	crontab.Start()
-	select {}
+	//select {}
 
 	// Bane Server
-	bane.Server(app.Config, app.logger)
+	go bane.Server(app.Config, app.logger)
 }
 
 func main() {
