@@ -36,6 +36,10 @@ func Server(cfg config.Config, logger *logrus.Logger) {
 
 	contractAbi, err := abi.JSON(strings.NewReader(string(bane.BridgeEventMetaData.ABI)))
 
+	if err != nil {
+		logger.Error(err)
+	}
+
 	for {
 		select {
 		case err := <-sub.Err():
